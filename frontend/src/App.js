@@ -1,12 +1,12 @@
 import './App.css';
-import LoginPanel from './components/Login'
+import Panel from './pages/Panel'
 
 function App() {
   return (
     <div className="App">
 
 
-      <LoginPanel/>
+      <Panel/>
       
 
       

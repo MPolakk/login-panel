@@ -84,6 +84,7 @@
       align-items: center;
 
       input[type="checkbox"]{
+        border: 1px solid black;
        position: relative;
        appearance: none;
        -webkit-appearance: none;
@@ -128,7 +129,7 @@
       input[type="checkbox"]:checked::after,  input[type="checkbox"]:checked::before{
        display: block;
       }
-      
+     
       .bar__checkbox-desc{
        font-size: 12px;
        font-weight: bold;
