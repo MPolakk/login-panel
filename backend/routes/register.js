@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router();
-// const User = require('../model/user')
+const User = require('../model/user')
 const crypto = require('crypto')
-const sha256 = crypto.createHash('sha256');
 
-router.get('/register', (req, res) => {
- sha256.update("cos")
- res.send(sha256.digest('hex'))
- // const newUser = new User({ username: "Hehe", password: "greded"});
- // newUser.save().then(() => console.log('Nowy użytkownik dodany'));
+
+router.post('/register', async (req, res) => {
+ const hashed = await crypto.createHash('sha256').update(req.body.password).digest('hex');
+ 
+ const newUser = await new User({ username: req.body.username, password: hashed });
+ newUser.save().then(() =>{ console.log("działa")});
+
 })
 
 module.exports = router

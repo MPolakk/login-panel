@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Login = (props) => {
 
-const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, invalidPassword, checkBox, checkBoxHandler, loginHandler, registerButtonHandler} = props
+const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, invalidPassword, checkBox, checkBoxHandler, loginButtonHandler, registerButtonHandler} = props
 
 
 
@@ -24,7 +24,7 @@ const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, i
 
 
       {/* EMAIL */}
-       <EmailForm value={emailValue} emailhandler={emailHandler} invalidEmail={invalidEmail}/>
+       <EmailForm emailValue={emailValue} emailHandler={emailHandler} invalidEmail={invalidEmail}/>
 
        {/* PASSWORD */}
        <PasswordForm passwordValue={passwordValue} passwordHandler={passwordHandler} invalidPassword = {invalidPassword}/>
@@ -40,7 +40,7 @@ const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, i
        {/* FORGOT PASSWORD */}
        <button className="bar__forgot" onClick={checkBoxHandler}>Zapomniałeś hasła?</button>
 
-       <button className="bar__login" onClick={loginHandler}>Zaloguj</button>
+       <button className="bar__login" onClick={loginButtonHandler}>Zaloguj</button>
 
 
         {/* REGISTER */}

@@ -1,6 +1,11 @@
+
+
+
 const EmailForm = (props) => {
 
- const {emailValue, emailHandler, invalidEmail} = props
+ const {emailValue, emailHandler, invalidEmail} = props;
+
+
  return ( 
   <>
 

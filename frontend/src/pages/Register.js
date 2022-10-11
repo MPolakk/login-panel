@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 
 
-const Login = (props) => {
+const Register = (props) => {
 
-const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, invalidPassword, checkBox, checkBoxHandler, loginHandler, registerButtonHandler} = props
+const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, invalidPassword, registerButtonHandler} = props
 
 
 
@@ -24,7 +24,7 @@ const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, i
 
 
       {/* EMAIL */}
-       <EmailForm value={emailValue} emailhandler={emailHandler} invalidEmail={invalidEmail}/>
+       <EmailForm emailValue={emailValue} emailHandler={emailHandler} invalidEmail={invalidEmail}/>
 
        {/* PASSWORD */}
        <PasswordForm passwordValue={passwordValue} passwordHandler={passwordHandler} invalidPassword = {invalidPassword}/>
@@ -33,7 +33,7 @@ const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, i
         {/* REGISTER */}
         <div className="login-panel__bar">
 
-       <button className="bar__login" onClick={loginHandler}>Zarejestruj się</button>
+       <button className="bar__login" onClick={registerButtonHandler}>Zarejestruj się</button>
 
 
         {/* Login */}
@@ -56,4 +56,4 @@ const {emailValue, emailHandler, invalidEmail, passwordValue, passwordHandler, i
   );
 }
  
-export default Login;
+export default Register;

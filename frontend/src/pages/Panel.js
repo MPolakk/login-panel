@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import '../styles/login.scss'
 import Login from './Login'
 import Register from './Register'
+import axios from 'axios'
 
 
 
@@ -14,8 +15,8 @@ class Panel extends React.Component {
    emailValue: "",
    passwordValue: "",
    emailChar: "",
-   invalidEmail: "",
-   invalidPassword: ""
+   invalidEmail: false,
+   invalidPassword: false
   }
   // PASSWORD
   
@@ -33,7 +34,7 @@ class Panel extends React.Component {
   this.setState({
     emailChar: emailValue.indexOf('@'),
     emailValue,
-    invalidEmail: ""
+    invalidEmail: false
   })
 
 
@@ -41,21 +42,27 @@ class Panel extends React.Component {
 
  passwordHandler = (e) => {
  
-  const passwordValue = e.target.value 
+  const passwordValue = e.target.value;
   this.setState({ 
     passwordValue,
-    invalidPassword: ""
+    invalidPassword: false
   } )
  }
 
- loginHandler = (e) => {
+ validateHandler = (e) => {
   const minCharPassword = 8;
-  e.preventDefault()
+ 
   if( this.state.emailChar === -1) {
     this.setState({
       invalidEmail: true
     })
-  }
+  } else {
+    this.setState({
+      invalidPassword: false
+     })
+    }
+
+
   if( this.state.passwordValue.length < minCharPassword) {
     this.setState({
       invalidPassword: true
@@ -65,13 +72,35 @@ class Panel extends React.Component {
       invalidPassword: false
      })
     }
+    
  }
  registerButtonHandler = (e) => {
   e.preventDefault();
-  this.loginHandler();
+  this.validateHandler();
 
+  if(this.state.invalidEmail === false && this.state.invalidPassword === false) {
+
+    const user = {
+      username: this.state.emailValue,
+      password: this.state.passwordValue
+    }
+  
+    axios.post('http://localhost:3001/register', user).then(res => {
+      console.log(res)
+    })
+
+  this.setState({
+    emailValue: "",
+    passwordValue: ""
+  })
+}
 }
 
+loginButtonHandler = (e) => {
+  e.preventDefault();
+  this.validateHandler();
+
+}
 
  render () {
  
@@ -80,18 +109,26 @@ class Panel extends React.Component {
     <Routes>
       <Route path='/' element={<Login 
     emailValue= {this.state.emailValue} 
-    emailhandler={this.emailHandler} 
+    emailHandler={this.emailHandler} 
     invalidEmail={this.state.invalidEmail}
     passwordValue={this.state.passwordValue}
     passwordHandler={this.passwordHandler}
     invalidPassword = {this.state.invalidPassword}
     checkBox = {this.state.checkBox}
     checkBoxHandler={this.checkboxHandler}
-    loginHandler={this.loginHandler}
-    registerButtonHandler={this.registerButtonHandler}
+    loginButtonHandler={this.loginButtonHandler}
     />}/>
       <Route path='/register' element={
-        <Register/>
+        <Register
+        emailValue= {this.state.emailValue} 
+        emailHandler={this.emailHandler}
+        invalidEmail={this.state.invalidEmail}
+        passwordValue={this.state.passwordValue}
+        passwordHandler={this.passwordHandler}
+        invalidPassword = {this.state.invalidPassword}
+        loginHandler={this.loginHandler}
+        registerButtonHandler={this.registerButtonHandler}
+        />
       }/>
     
     </Routes>
